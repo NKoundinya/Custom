@@ -27,27 +27,30 @@ export default function Home() {
             setEnterName(true)
             setEnterEmail(false)
             setEnterPass(false)
-            return false
+            return false;
         }
 
-        if ((email === '') &&
-            (email !== /[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]{3}/ ||
-                email !== /[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]{2}\.[a-z]{3}/ ||
-                email !== /[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]{2}/ ||
-                email !== /[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]{2}\.[a-z]{2}/)) {
-
+        if (email === '') {
             setEnterName(false)
             setEnterEmail(true)
             setEnterPass(false)
-            return false
+            return false;
         }
 
         if (password === '') {
             setEnterName(false)
             setEnterEmail(false)
             setEnterPass(true)
-            return false
+            return false;
         }
+
+        if (!(new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/, "igm").test(email))) {
+            setEnterName(false)
+            setEnterEmail(true)
+            setEnterPass(false)
+            return false;
+        }
+
 
         setIsClicked(!isClicked)
 
@@ -60,6 +63,7 @@ export default function Home() {
             email: email,
             password: password
         })
+
         return true;
     }
 
@@ -70,42 +74,49 @@ export default function Home() {
                     <Form className="Form" onSubmit={submitForm}>
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="name">Name:</label>
                             </div>
                             <div className="col-75">
                                 <CustomInput
                                     type="text"
+                                    onFocus={() => setEnterName(false)}
                                     onValueChange={(e) => setName(e.target.value)}
                                     value={name}
-                                    placeholder={"Name"} />
+                                    placeholder={"Name"}
+                                />
                             </div>
-                            {enterName ? <label>Enter Name</label> : <label></label>}
+                            {enterName ? <label className="red">Enter Name</label> : <label></label>}
                         </div>
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="email">Email Id</label>
+                                <label htmlFor="email">Email ID: </label>
                             </div>
                             <div className="col-75">
                                 <CustomInput
+                                    onFocus={() => setEnterEmail(false)}
                                     type="email"
                                     onValueChange={e => setEmail(e.target.value)}
                                     value={email}
-                                    placeholder={"Email ID"} />
+                                    placeholder={"Email ID"}
+                                />
                             </div>
-                            {enterEmail ? <label>Enter Proper Email</label> : <label></label>}
+                            {enterEmail ? <label className="red">Enter Proper Email</label> : <label></label>}
                         </div>
+
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="Password">Password</label>
+                                <label htmlFor="Password">Password:</label>
                             </div>
                             <div className="col-75">
                                 <CustomInput
                                     type="password"
+                                    onFocus={() => setEnterPass(false)}
                                     onValueChange={e => setPassword(e.target.value)}
                                     value={password}
-                                    placeholder={"Password"} />
+                                    placeholder={"Password"}
+                                />
                             </div>
-                            {enterPass ? <label>Enter Password</label> : <label></label>}
+                            {enterPass ? <label className="red">Enter Password</label> : <label></label>}
                         </div>
                         <div className="row">
                             <CustomInput type="submit" value={"Login"} />

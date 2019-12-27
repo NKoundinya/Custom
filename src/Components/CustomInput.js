@@ -7,10 +7,12 @@ export default function CustomInput({
     onValueChange,
     placeholder,
     onSubmit,
-    onClick
+    onClick,
+    onFocus
 }) {
     return (
         <input
+            onFocus={onFocus}
             type={type}
             onChange={onValueChange}
             value={value}

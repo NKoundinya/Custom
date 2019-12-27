@@ -12,12 +12,8 @@ input {
 }
 
 label {
-    padding: 12px 12px 12px 0;
+    padding: 20px 20px 20px 20px;
     display: inline-block;
-}
-
-.red {
-    color: red;
 }
 
 input[type=submit] {
@@ -79,3 +75,7 @@ input[type=button]:hover {
     }
 }
 
+table, tr, th, td {
+    border: 3px solid cadetblue;
+    border-collapse: collapse;
+}
